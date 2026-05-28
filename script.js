@@ -11,3 +11,5 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 });
 
 // Commit 4: add debug log\nconsole.log('Login page loaded');
+// Commit 4: add debug log
+console.log('Login page loaded');
