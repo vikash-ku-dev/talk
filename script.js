@@ -29,4 +29,13 @@ forgotPasswordLink.addEventListener('click', function(e) {
   }
 });
 
+const registerLink = document.getElementById('registerLink');
+registerLink.addEventListener('click', function(e) {
+  e.preventDefault();
+  const email = window.prompt('Enter your email to start registration.');
+  if (email) {
+    alert('Registration started for ' + email + '. Follow the next steps to create your account.');
+  }
+});
+
 console.log('Login page loaded');

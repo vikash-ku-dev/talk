@@ -57,6 +57,12 @@ html, body {
   text-decoration: underline;
 }
 
+.register-prompt {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
 /* Commit 2: tweak spacing */
 
 /* Commit 2: tweak spacing */
