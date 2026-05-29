@@ -38,4 +38,6 @@ registerLink.addEventListener('click', function(e) {
   }
 });
 
+document.getElementById('username').focus();
+
 console.log('Login page loaded');

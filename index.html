@@ -9,12 +9,24 @@
 <body>
   <div class="login-wrapper">
     <form id="loginForm" class="login-card" action="#" method="post">
-      <h1>Login</h1>
-      <label for="username">Username, email, or phone number</label>
-      <input id="username" name="username" type="text" placeholder="Enter username, email, or phone" required autocomplete="username">
+      <div class="brand-block">
+        <span class="brand-badge">T</span>
+        <div>
+          <p class="eyebrow">Secure access</p>
+          <h1>Welcome back</h1>
+        </div>
+      </div>
+      <p class="login-copy">Sign in to continue to your account.</p>
 
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required autocomplete="current-password">
+      <div class="field-group">
+        <label for="username">Username, email, or phone number</label>
+        <input id="username" name="username" type="text" placeholder="Enter username, email, or phone" required autocomplete="username">
+      </div>
+
+      <div class="field-group">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" required autocomplete="current-password">
+      </div>
 
       <button type="submit">Log In</button>
 
