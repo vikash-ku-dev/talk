@@ -154,3 +154,25 @@ body {
 /* Commit 2: tweak spacing */
 
 /* Commit 2: tweak spacing */
+
+/* Skeleton animation */
+.skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.6rem;
+  pointer-events: none;
+}
+.skeleton svg { display: block; }
+.head { transition: transform 300ms ease; transform-origin: 50% 50%; }
+.eye { transition: transform 120ms ease; }
+.pupil { transition: transform 120ms ease; transform-origin: center; }
+
+/* When typing password, look away: flip head and center pupils */
+.skeleton.look-away .head { transform: scaleX(-1) rotate(-12deg) translateY(-4px); }
+.skeleton.look-away .pupil { transform: translateX(-6px) translateY(0); }
+
+/* small responsive tweak */
+@media (max-width: 480px) {
+  .skeleton svg { width: 120px; height: 84px; }
+}
