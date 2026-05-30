@@ -6,6 +6,13 @@
   <title>Login</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+<div class="login-wrapper">
+        <span class="brand-badge">T</span>
+        <div>
+          <h1>Welcome back</h1>
+        </div>
+      </div>
+
 <body>
   <div class="login-wrapper">
     <form id="loginForm" class="login-card" action="#" method="post">
@@ -13,10 +20,10 @@
         <span class="brand-badge">T</span>
         <div>
           <p class="eyebrow">Secure access</p>
-          <h1>Welcome back</h1>
+          <h1>Talk</h1>
         </div>
       </div>
-      <p class="login-copy">Sign in to continue to your account.</p>
+      <p class="login-copy"></p>
 
       <div class="field-group">
         <label for="username">Username, email, or phone number</label>
@@ -25,7 +32,7 @@
 
       <div class="field-group">
         <label for="password">Password</label>
-        <input id="password" name="password" type="password" required autocomplete="current-password">
+        <input id="password" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password">
       </div>
 
       <button type="submit">Log In</button>
