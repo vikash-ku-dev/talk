@@ -32,6 +32,102 @@ forgotPasswordLink.addEventListener('click', function(e) {
 
 document.getElementById('username').focus();
 
+// ===== SKELETON EYE-TRACKING SYSTEM =====
+(function() {
+  const skeleton = document.getElementById('skeleton');
+  const pupilL = document.getElementById('pupilL');
+  const pupilR = document.getElementById('pupilR');
+  const pwd = document.getElementById('password');
+  
+  if (!skeleton || !pupilL || !pupilR || !pwd) {
+    console.warn('Skeleton elements not found');
+    return;
+  }
+
+  let typingPassword = false;
+  let lastMouseX = window.innerWidth / 2;
+  let lastMouseY = window.innerHeight / 2;
+  let rafId = null;
+
+  function setLookAway(state) {
+    typingPassword = !!state;
+    if (typingPassword) {
+      skeleton.classList.add('look-away');
+    } else {
+      skeleton.classList.remove('look-away');
+    }
+  }
+
+  function movePupil(pupil, clientX, clientY) {
+    const eyeRect = pupil.getBoundingClientRect();
+    // Calculate center of the eye
+    const cx = eyeRect.left + eyeRect.width / 2;
+    const cy = eyeRect.top + eyeRect.height / 2;
+    
+    let dx = clientX - cx;
+    let dy = clientY - cy;
+    
+    // Max distance the pupil can move from center
+    const maxDistance = 8;
+    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+    const scale = Math.min(maxDistance / distance, 1);
+    
+    dx = dx * scale;
+    dy = dy * scale;
+    
+    // Apply transform with GPU acceleration
+    pupil.style.transform = `translate(${dx}px, ${dy}px)`;
+  }
+
+  function updatePupils() {
+    if (typingPassword) return; // Don't update when typing password
+    
+    movePupil(pupilL, lastMouseX, lastMouseY);
+    movePupil(pupilR, lastMouseX, lastMouseY);
+    
+    rafId = null;
+  }
+
+  // Track mouse movement with requestAnimationFrame for better performance
+  window.addEventListener('mousemove', (e) => {
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    
+    // Only update on next animation frame to avoid performance issues
+    if (!rafId) {
+      rafId = requestAnimationFrame(updatePupils);
+    }
+  }, { passive: true });
+
+  // Look away when user starts typing password
+  pwd.addEventListener('input', (e) => {
+    const hasText = String(e.target.value || '').length > 0;
+    setLookAway(hasText);
+    
+    if (!hasText) {
+      // Restore pupils to neutral position when password is cleared
+      pupilL.style.transform = '';
+      pupilR.style.transform = '';
+    }
+  });
+
+  // Handle password field focus/blur
+  pwd.addEventListener('focus', () => {
+    setLookAway(pwd.value && pwd.value.length > 0);
+  });
+  
+  pwd.addEventListener('blur', () => {
+    setLookAway(false);
+    // Reset pupils when field loses focus and is empty
+    if (!pwd.value || pwd.value.length === 0) {
+      pupilL.style.transform = '';
+      pupilR.style.transform = '';
+    }
+  });
+
+  console.log('✓ Skeleton eye-tracking system initialized with optimized performance');
+})();
+
 // ===== REGISTER PAGE LOGIC =====
 const loginPage = document.getElementById('loginPage');
 const registerPage = document.getElementById('registerPage');
