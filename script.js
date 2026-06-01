@@ -45,6 +45,9 @@ document.getElementById('username').focus();
   }
 
   let typingPassword = false;
+  let lastMouseX = window.innerWidth / 2;
+  let lastMouseY = window.innerHeight / 2;
+  let rafId = null;
 
   function setLookAway(state) {
     typingPassword = !!state;
@@ -57,29 +60,43 @@ document.getElementById('username').focus();
 
   function movePupil(pupil, clientX, clientY) {
     const eyeRect = pupil.getBoundingClientRect();
-    // center of the eye
+    // Calculate center of the eye
     const cx = eyeRect.left + eyeRect.width / 2;
     const cy = eyeRect.top + eyeRect.height / 2;
     
     let dx = clientX - cx;
     let dy = clientY - cy;
     
-    const maxDistance = 8; // max pupil travel distance
+    // Max distance the pupil can move from center
+    const maxDistance = 8;
     const distance = Math.sqrt(dx * dx + dy * dy) || 1;
     const scale = Math.min(maxDistance / distance, 1);
     
     dx = dx * scale;
     dy = dy * scale;
     
+    // Apply transform with GPU acceleration
     pupil.style.transform = `translate(${dx}px, ${dy}px)`;
   }
 
-  // Track mouse movement and update pupil positions
-  window.addEventListener('mousemove', (e) => {
-    if (typingPassword) return; // Don't track when typing password
+  function updatePupils() {
+    if (typingPassword) return; // Don't update when typing password
     
-    movePupil(pupilL, e.clientX, e.clientY);
-    movePupil(pupilR, e.clientX, e.clientY);
+    movePupil(pupilL, lastMouseX, lastMouseY);
+    movePupil(pupilR, lastMouseX, lastMouseY);
+    
+    rafId = null;
+  }
+
+  // Track mouse movement with requestAnimationFrame for better performance
+  window.addEventListener('mousemove', (e) => {
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    
+    // Only update on next animation frame to avoid performance issues
+    if (!rafId) {
+      rafId = requestAnimationFrame(updatePupils);
+    }
   }, { passive: true });
 
   // Look away when user starts typing password
@@ -101,14 +118,14 @@ document.getElementById('username').focus();
   
   pwd.addEventListener('blur', () => {
     setLookAway(false);
-    // Reset pupils when field loses focus
+    // Reset pupils when field loses focus and is empty
     if (!pwd.value || pwd.value.length === 0) {
       pupilL.style.transform = '';
       pupilR.style.transform = '';
     }
   });
 
-  console.log('✓ Skeleton eye-tracking system initialized');
+  console.log('✓ Skeleton eye-tracking system initialized with optimized performance');
 })();
 
 // ===== REGISTER PAGE LOGIC =====
