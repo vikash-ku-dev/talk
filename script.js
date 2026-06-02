@@ -93,11 +93,15 @@ document.getElementById('username').focus();
     }
   }
 
-  window.addEventListener('pointermove', handlePointerMove, { passive: true });
-  window.addEventListener('mouseleave', () => {
+  function resetPupils() {
     pupilL.style.transform = '';
     pupilR.style.transform = '';
-  });
+  }
+
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+  window.addEventListener('pointerleave', resetPupils, { passive: true });
+  window.addEventListener('pointercancel', resetPupils, { passive: true });
+  window.addEventListener('mouseleave', resetPupils);
 
   // Look away when user starts typing password
   pwd.addEventListener('input', (e) => {
