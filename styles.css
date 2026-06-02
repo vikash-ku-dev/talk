@@ -164,9 +164,9 @@ body {
   pointer-events: none;
 }
 .skeleton svg { display: block; }
-.head { transition: transform 300ms ease; transform-origin: 50% 50%; }
+.head { transition: transform 300ms ease; transform-origin: 50% 50%; transform-box: fill-box; }
 .eye { transition: transform 120ms ease; }
-.pupil { transition: transform 120ms ease; transform-origin: center; }
+.pupil { transition: transform 120ms ease; transform-origin: center; transform-box: fill-box; }
 
 /* When typing password, look away: flip head and center pupils */
 .skeleton.look-away .head { transform: scaleX(-1) rotate(-12deg) translateY(-4px); }

@@ -60,44 +60,44 @@ document.getElementById('username').focus();
 
   function movePupil(pupil, clientX, clientY) {
     const eyeRect = pupil.getBoundingClientRect();
-    // Calculate center of the eye
     const cx = eyeRect.left + eyeRect.width / 2;
     const cy = eyeRect.top + eyeRect.height / 2;
     
     let dx = clientX - cx;
     let dy = clientY - cy;
-    
-    // Max distance the pupil can move from center
-    const maxDistance = 8;
-    const distance = Math.sqrt(dx * dx + dy * dy) || 1;
-    const scale = Math.min(maxDistance / distance, 1);
-    
-    dx = dx * scale;
-    dy = dy * scale;
-    
-    // Apply transform with GPU acceleration
+    const max = 8; // max pupil travel
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const scale = Math.min(max / dist, 1);
+    dx *= scale;
+    dy *= scale;
     pupil.style.transform = `translate(${dx}px, ${dy}px)`;
   }
 
   function updatePupils() {
-    if (typingPassword) return; // Don't update when typing password
-    
+    if (typingPassword) {
+      rafId = null;
+      return;
+    }
+
     movePupil(pupilL, lastMouseX, lastMouseY);
     movePupil(pupilR, lastMouseX, lastMouseY);
-    
     rafId = null;
   }
 
-  // Track mouse movement with requestAnimationFrame for better performance
-  window.addEventListener('mousemove', (e) => {
+  function handlePointerMove(e) {
     lastMouseX = e.clientX;
     lastMouseY = e.clientY;
-    
-    // Only update on next animation frame to avoid performance issues
+
     if (!rafId) {
       rafId = requestAnimationFrame(updatePupils);
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+  window.addEventListener('mouseleave', () => {
+    pupilL.style.transform = '';
+    pupilR.style.transform = '';
+  });
 
   // Look away when user starts typing password
   pwd.addEventListener('input', (e) => {
