@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <!-- LOGIN PAGE -->
+
   <div id="loginPage" class="login-wrapper">
     <form id="loginForm" class="login-card" action="#" method="post">
       <div class="brand-block">
@@ -20,7 +20,6 @@
         </div>
       </div>
 
-      <!-- Skeleton animation replaces the old welcome text -->
       <div id="skeleton" class="skeleton" aria-hidden="true">
         <svg viewBox="0 0 200 140" width="160" height="112" xmlns="http://www.w3.org/2000/svg">
           <g id="head" class="head" transform="translate(100,70)">
@@ -57,7 +56,6 @@
     </form>
   </div>
 
-  <!-- REGISTER PAGE -->
   <div id="registerPage" class="register-wrapper" style="display: none;">
     <div class="register-card">
       <div class="brand-block">
@@ -73,7 +71,6 @@
       </div>
       <p class="step-counter"><span id="currentStep">1</span> / 6</p>
 
-      <!-- STEP 1: Email & Phone -->
       <div id="step1" class="register-step active">
         <h2>Contact Information</h2>
         <div class="field-group">
@@ -87,7 +84,6 @@
         <button type="button" class="btn-primary" id="step1Btn">Next</button>
       </div>
 
-      <!-- STEP 2: Email OTP -->
       <div id="step2" class="register-step">
         <h2>Verify Email</h2>
         <p class="step-description">We've sent a code to <strong id="emailDisplay"></strong></p>
@@ -102,7 +98,6 @@
         </div>
       </div>
 
-      <!-- STEP 3: Phone OTP -->
       <div id="step3" class="register-step">
         <h2>Verify Phone</h2>
         <p class="step-description">We've sent a code to <strong id="phoneDisplay"></strong></p>
@@ -117,7 +112,6 @@
         </div>
       </div>
 
-      <!-- STEP 4: Username -->
       <div id="step4" class="register-step">
         <h2>Choose Username</h2>
         <p class="step-description">Username will be lowercase and unique to your account</p>
@@ -133,7 +127,6 @@
         </div>
       </div>
 
-      <!-- STEP 5: Full Name -->
       <div id="step5" class="register-step">
         <h2>Full Name</h2>
         <div class="field-group">
@@ -170,7 +163,7 @@
       <p class="login-prompt">Already have an account? <a href="#" id="backToLoginLink" class="help-link">Log In</a></p>
     </div>
   </div>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
