@@ -8,6 +8,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     return;
   }
   alert('Logged in as ' + u);
+  // Redirect to profile page
+  window.location.href = 'profile.html';
   this.reset();
 });
 

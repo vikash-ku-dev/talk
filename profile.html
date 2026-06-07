@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Profile - Talk</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="profile-wrapper">
+    <!-- Navigation -->
+    <nav class="profile-nav">
+      <div class="nav-container">
+        <div class="brand-block">
+          <span class="brand-badge">T</span>
+          <h1>Talk</h1>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Profile Container -->
+    <div class="profile-container">
+      <!-- Profile Header Section -->
+      <div class="profile-header">
+        <div class="profile-picture-wrapper">
+          <img id="profilePicture" src="https://via.placeholder.com/150/0078d4/ffffff?text=User" alt="Profile Picture" class="profile-picture">
+          <button class="edit-picture-btn" id="editPictureBtn">Change Picture</button>
+        </div>
+      </div>
+
+      <!-- Profile Main Content -->
+      <div class="profile-content">
+        <!-- User Info Section -->
+        <section class="profile-section">
+          <h2 class="section-title">User Information</h2>
+          <div class="info-group">
+            <div class="info-item">
+              <label>Name:</label>
+              <span id="userName" class="info-value">John Doe</span>
+              <button class="edit-btn" data-field="name">Edit</button>
+            </div>
+            <div class="info-item">
+              <label>User ID:</label>
+              <span id="userId" class="info-value">#USER123456</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bio Section -->
+        <section class="profile-section">
+          <h2 class="section-title">Bio</h2>
+          <div class="bio-wrapper">
+            <p id="userBio" class="user-bio">Welcome to my profile! I'm here to connect and share experiences with friends.</p>
+            <button class="edit-btn" data-field="bio">Edit Bio</button>
+          </div>
+        </section>
+
+        <!-- Friends Section -->
+        <section class="profile-section">
+          <h2 class="section-title">Friends <span class="friend-count" id="friendCount">(0)</span></h2>
+          <div class="friends-container" id="friendsList">
+            <p class="empty-state">No friends yet. Start connecting!</p>
+          </div>
+          <button class="add-friend-btn" id="addFriendBtn">Add Friend</button>
+        </section>
+
+        <!-- Additional Info Section -->
+        <section class="profile-section">
+          <h2 class="section-title">Account Settings</h2>
+          <div class="settings-group">
+            <p><strong>Email:</strong> <span id="userEmail">john.doe@example.com</span></p>
+            <p><strong>Member Since:</strong> <span id="memberSince">January 2024</span></p>
+            <button class="settings-btn">Edit Account Settings</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal for Name -->
+  <div class="modal" id="editNameModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Name</h3>
+        <button class="modal-close" id="closeNameModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="nameInput" placeholder="Enter your name" class="modal-input">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="cancelNameBtn">Cancel</button>
+        <button class="btn-save" id="saveNameBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Modal for Bio -->
+  <div class="modal" id="editBioModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Edit Bio</h3>
+        <button class="modal-close" id="closeBioModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <textarea id="bioInput" placeholder="Write your bio..." class="modal-textarea" rows="5"></textarea>
+        <p class="char-count"><span id="charCount">0</span>/150 characters</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="cancelBioBtn">Cancel</button>
+        <button class="btn-save" id="saveBioBtn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Friend Modal -->
+  <div class="modal" id="addFriendModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add Friend</h3>
+        <button class="modal-close" id="closeAddFriendModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="friendInput" placeholder="Enter friend's username or ID" class="modal-input">
+        <div class="suggested-friends" id="suggestedFriends"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="cancelAddFriendBtn">Cancel</button>
+        <button class="btn-save" id="addFriendSaveBtn">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="profile.js"></script>
+</body>
+</html>
