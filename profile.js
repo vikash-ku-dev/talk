@@ -6,7 +6,8 @@ const profileData = {
   bio: 'Welcome to my profile! I\'m here to connect and share experiences with friends.',
   profilePicture: 'https://via.placeholder.com/150/0078d4/ffffff?text=User',
   memberSince: 'January 2024',
-  friends: []
+  friends: [],
+  accountStatus: 'Active'
 };
 
 // Sample friend data for suggestions
@@ -15,13 +16,43 @@ const suggestedFriendsList = [
   { id: '#FRIEND002', name: 'Bob Smith', status: 'Offline' },
   { id: '#FRIEND003', name: 'Carol White', status: 'Online' },
   { id: '#FRIEND004', name: 'David Brown', status: 'Online' },
-  { id: '#FRIEND005', name: 'Emma Davis', status: 'Away' }
+  { id: '#FRIEND005', name: 'Emma Davis', status: 'Away' },
+  { id: '#FRIEND006', name: 'Frank Miller', status: 'Online' },
+  { id: '#FRIEND007', name: 'Grace Lee', status: 'Offline' }
 ];
+
+// ===== TOAST NOTIFICATION SYSTEM =====
+function showToast(message, type = 'success', duration = 3000) {
+  const toast = document.getElementById('toast');
+  const toastMessage = document.getElementById('toastMessage');
+  
+  toastMessage.textContent = message;
+  toast.className = `toast ${type} show`;
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
+
+// ===== PROFILE COMPLETION CALCULATION =====
+function calculateProfileCompletion() {
+  let completion = 0;
+  const maxPoints = 5;
+  
+  if (profileData.name && profileData.name.length > 0) completion++;
+  if (profileData.bio && profileData.bio.length > 0) completion++;
+  if (profileData.email && profileData.email.length > 0) completion++;
+  if (profileData.friends.length > 0) completion++;
+  if (profileData.profilePicture !== 'https://via.placeholder.com/150/0078d4/ffffff?text=User') completion++;
+  
+  return Math.round((completion / maxPoints) * 100);
+}
 
 // ===== INITIALIZE PROFILE =====
 document.addEventListener('DOMContentLoaded', function() {
   loadProfile();
   setupEventListeners();
+  updateProfileStats();
 });
 
 function loadProfile() {
@@ -31,8 +62,17 @@ function loadProfile() {
   document.getElementById('userEmail').textContent = profileData.email;
   document.getElementById('memberSince').textContent = profileData.memberSince;
   document.getElementById('profilePicture').src = profileData.profilePicture;
+  document.getElementById('accountStatus').textContent = profileData.accountStatus;
   
   renderFriends();
+}
+
+function updateProfileStats() {
+  document.getElementById('statFriends').textContent = profileData.friends.length;
+  document.getElementById('statMember').textContent = profileData.memberSince.split(' ')[1];
+  
+  const completion = calculateProfileCompletion();
+  document.getElementById('statCompletion').textContent = completion + '%';
 }
 
 // ===== EVENT LISTENERS SETUP =====
@@ -67,16 +107,37 @@ function setupEventListeners() {
   // Change Profile Picture
   document.getElementById('editPictureBtn').addEventListener('click', changeProfilePicture);
 
+  // Copy User ID
+  document.getElementById('copyIdBtn').addEventListener('click', copyUserId);
+
+  // Name character counter
+  document.getElementById('nameInput').addEventListener('input', function() {
+    document.getElementById('nameCharCount').textContent = this.value.length;
+  });
+
   // Bio character counter
   document.getElementById('bioInput').addEventListener('input', function() {
     document.getElementById('charCount').textContent = this.value.length;
   });
 }
 
+// ===== COPY USER ID =====
+function copyUserId() {
+  const userId = profileData.userId;
+  navigator.clipboard.writeText(userId).then(() => {
+    showToast('User ID copied to clipboard!', 'success');
+  }).catch(() => {
+    showToast('Failed to copy User ID', 'error');
+  });
+}
+
 // ===== EDIT NAME MODAL =====
 function openEditNameModal() {
-  document.getElementById('nameInput').value = profileData.name;
+  const nameInput = document.getElementById('nameInput');
+  nameInput.value = profileData.name;
+  document.getElementById('nameCharCount').textContent = profileData.name.length;
   document.getElementById('editNameModal').classList.add('active');
+  nameInput.focus();
 }
 
 function closeEditNameModal() {
@@ -86,24 +147,32 @@ function closeEditNameModal() {
 function saveName() {
   const newName = document.getElementById('nameInput').value.trim();
   if (newName.length === 0) {
-    alert('Name cannot be empty');
+    showToast('Name cannot be empty', 'error');
     return;
   }
   if (newName.length > 50) {
-    alert('Name must be 50 characters or less');
+    showToast('Name must be 50 characters or less', 'error');
+    return;
+  }
+  if (newName === profileData.name) {
+    showToast('No changes made', 'info');
+    closeEditNameModal();
     return;
   }
   profileData.name = newName;
   document.getElementById('userName').textContent = profileData.name;
   closeEditNameModal();
-  alert('Name updated successfully!');
+  updateProfileStats();
+  showToast('Name updated successfully!', 'success');
 }
 
 // ===== EDIT BIO MODAL =====
 function openEditBioModal() {
-  document.getElementById('bioInput').value = profileData.bio;
+  const bioInput = document.getElementById('bioInput');
+  bioInput.value = profileData.bio;
   document.getElementById('charCount').textContent = profileData.bio.length;
   document.getElementById('editBioModal').classList.add('active');
+  bioInput.focus();
 }
 
 function closeEditBioModal() {
@@ -113,13 +182,19 @@ function closeEditBioModal() {
 function saveBio() {
   const newBio = document.getElementById('bioInput').value.trim();
   if (newBio.length > 150) {
-    alert('Bio must be 150 characters or less');
+    showToast('Bio must be 150 characters or less', 'error');
+    return;
+  }
+  if (newBio === profileData.bio) {
+    showToast('No changes made', 'info');
+    closeEditBioModal();
     return;
   }
   profileData.bio = newBio;
   document.getElementById('userBio').textContent = profileData.bio;
   closeEditBioModal();
-  alert('Bio updated successfully!');
+  updateProfileStats();
+  showToast('Bio updated successfully!', 'success');
 }
 
 // ===== FRIENDS MANAGEMENT =====
@@ -160,9 +235,11 @@ function renderFriends() {
 
 // ===== ADD FRIEND MODAL =====
 function openAddFriendModal() {
-  document.getElementById('friendInput').value = '';
+  const friendInput = document.getElementById('friendInput');
+  friendInput.value = '';
   document.getElementById('suggestedFriends').innerHTML = '';
   document.getElementById('addFriendModal').classList.add('active');
+  friendInput.focus();
 }
 
 function closeAddFriendModal() {
@@ -187,7 +264,8 @@ function suggestFriends() {
 
   suggestionsContainer.innerHTML = suggestions.map(friend => `
     <div class="suggestion-item" data-id="${friend.id}" data-name="${friend.name}" data-status="${friend.status}">
-      <span>${friend.name} (${friend.id})</span>
+      <span>${friend.name}</span>
+      <span style="font-size: 0.8rem; opacity: 0.7;">(${friend.id})</span>
     </div>
   `).join('');
 
@@ -202,7 +280,7 @@ function suggestFriends() {
 function addFriend() {
   const friendInput = document.getElementById('friendInput').value.trim();
   if (!friendInput) {
-    alert('Please enter a friend\'s name or ID');
+    showToast('Please enter a friend\'s name or ID', 'error');
     return;
   }
 
@@ -211,37 +289,46 @@ function addFriend() {
   );
 
   if (!friend) {
-    alert('Friend not found');
+    showToast('Friend not found', 'error');
     return;
   }
 
   if (profileData.friends.some(f => f.id === friend.id)) {
-    alert('This person is already your friend!');
+    showToast('This person is already your friend!', 'info');
     return;
   }
 
   profileData.friends.push(friend);
   renderFriends();
   closeAddFriendModal();
-  alert(`${friend.name} added as a friend!`);
+  updateProfileStats();
+  showToast(`${friend.name} added as a friend! 🎉`, 'success');
 }
 
 function removeFriend(friendId) {
-  if (confirm('Are you sure you want to remove this friend?')) {
+  const friend = profileData.friends.find(f => f.id === friendId);
+  if (friend && confirm(`Remove ${friend.name} from friends?`)) {
     profileData.friends = profileData.friends.filter(f => f.id !== friendId);
     renderFriends();
-    alert('Friend removed successfully!');
+    updateProfileStats();
+    showToast(`${friend.name} removed from friends`, 'success');
   }
 }
 
 // ===== PROFILE PICTURE =====
 function changeProfilePicture() {
-  const newPictureUrl = prompt('Enter image URL:', profileData.profilePicture);
-  if (newPictureUrl) {
+  const newPictureUrl = prompt('Enter image URL (or leave blank for default):', profileData.profilePicture);
+  if (newPictureUrl === null) return; // User cancelled
+  
+  if (newPictureUrl.trim() === '') {
+    profileData.profilePicture = 'https://via.placeholder.com/150/0078d4/ffffff?text=User';
+  } else {
     profileData.profilePicture = newPictureUrl;
-    document.getElementById('profilePicture').src = profileData.profilePicture;
-    alert('Profile picture updated successfully!');
   }
+  
+  document.getElementById('profilePicture').src = profileData.profilePicture;
+  updateProfileStats();
+  showToast('Profile picture updated successfully!', 'success');
 }
 
 // ===== MODAL CLOSE ON ESCAPE KEY =====

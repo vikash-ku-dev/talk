@@ -28,7 +28,23 @@
       <div class="profile-header">
         <div class="profile-picture-wrapper">
           <img id="profilePicture" src="https://via.placeholder.com/150/0078d4/ffffff?text=User" alt="Profile Picture" class="profile-picture">
-          <button class="edit-picture-btn" id="editPictureBtn">Change Picture</button>
+          <button class="edit-picture-btn" id="editPictureBtn">✏️ Change Picture</button>
+        </div>
+      </div>
+
+      <!-- Profile Stats -->
+      <div class="profile-stats" id="profileStats">
+        <div class="stat-card">
+          <span class="stat-label">Friends</span>
+          <span class="stat-value" id="statFriends">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Member Since</span>
+          <span class="stat-value" id="statMember">2024</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Profile</span>
+          <span class="stat-value" id="statCompletion">60%</span>
         </div>
       </div>
 
@@ -36,23 +52,28 @@
       <div class="profile-content">
         <!-- User Info Section -->
         <section class="profile-section">
-          <h2 class="section-title">User Information</h2>
+          <h2 class="section-title">👤 User Information</h2>
           <div class="info-group">
             <div class="info-item">
-              <label>Name:</label>
-              <span id="userName" class="info-value">John Doe</span>
+              <div>
+                <label>Name:</label>
+                <span id="userName" class="info-value">John Doe</span>
+              </div>
               <button class="edit-btn" data-field="name">Edit</button>
             </div>
             <div class="info-item">
-              <label>User ID:</label>
-              <span id="userId" class="info-value">#USER123456</span>
+              <div>
+                <label>User ID:</label>
+                <span id="userId" class="info-value">#USER123456</span>
+              </div>
+              <button class="copy-btn" id="copyIdBtn" title="Copy User ID">📋</button>
             </div>
           </div>
         </section>
 
         <!-- Bio Section -->
         <section class="profile-section">
-          <h2 class="section-title">Bio</h2>
+          <h2 class="section-title">✨ Bio</h2>
           <div class="bio-wrapper">
             <p id="userBio" class="user-bio">Welcome to my profile! I'm here to connect and share experiences with friends.</p>
             <button class="edit-btn" data-field="bio">Edit Bio</button>
@@ -61,24 +82,30 @@
 
         <!-- Friends Section -->
         <section class="profile-section">
-          <h2 class="section-title">Friends <span class="friend-count" id="friendCount">(0)</span></h2>
+          <h2 class="section-title">👥 Friends <span class="friend-count" id="friendCount">(0)</span></h2>
           <div class="friends-container" id="friendsList">
             <p class="empty-state">No friends yet. Start connecting!</p>
           </div>
-          <button class="add-friend-btn" id="addFriendBtn">Add Friend</button>
+          <button class="add-friend-btn" id="addFriendBtn">➕ Add Friend</button>
         </section>
 
         <!-- Additional Info Section -->
         <section class="profile-section">
-          <h2 class="section-title">Account Settings</h2>
+          <h2 class="section-title">⚙️ Account Settings</h2>
           <div class="settings-group">
             <p><strong>Email:</strong> <span id="userEmail">john.doe@example.com</span></p>
             <p><strong>Member Since:</strong> <span id="memberSince">January 2024</span></p>
+            <p><strong>Account Status:</strong> <span class="status-badge" id="accountStatus">Active</span></p>
             <button class="settings-btn">Edit Account Settings</button>
           </div>
         </section>
       </div>
     </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span id="toastMessage">Success!</span>
   </div>
 
   <!-- Edit Modal for Name -->
@@ -89,7 +116,8 @@
         <button class="modal-close" id="closeNameModal">&times;</button>
       </div>
       <div class="modal-body">
-        <input type="text" id="nameInput" placeholder="Enter your name" class="modal-input">
+        <input type="text" id="nameInput" placeholder="Enter your name" class="modal-input" maxlength="50">
+        <p class="char-count"><span id="nameCharCount">0</span>/50 characters</p>
       </div>
       <div class="modal-footer">
         <button class="btn-cancel" id="cancelNameBtn">Cancel</button>
@@ -106,7 +134,7 @@
         <button class="modal-close" id="closeBioModal">&times;</button>
       </div>
       <div class="modal-body">
-        <textarea id="bioInput" placeholder="Write your bio..." class="modal-textarea" rows="5"></textarea>
+        <textarea id="bioInput" placeholder="Write your bio..." class="modal-textarea" rows="5" maxlength="150"></textarea>
         <p class="char-count"><span id="charCount">0</span>/150 characters</p>
       </div>
       <div class="modal-footer">
