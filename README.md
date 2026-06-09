@@ -7,5 +7,5 @@ they casually Talk to the ai and Ai will improve there english and also improved
 
 - A clean and attractive UI/UX for chating fully encrypted and secure
 - New stickers user can use in its chat for talking
-- 
+- Self Custimize Avatars used in chatting
 
