@@ -9,5 +9,8 @@ they casually Talk to the ai and Ai will improve there english and also improved
 - New stickers user can use in its chat for talking
 - Self Custimize Avatars used in chatting
 - Animated Avatars which is used in chatting
-- 
 
+## What in it
+
+- A Profile Section where all the user set there profile and user make there profile public or private as they want
+- 
