@@ -13,4 +13,5 @@ they casually Talk to the ai and Ai will improve there english and also improved
 ## What in it
 
 - A Profile Section where all the user set there profile and user make there profile public or private as they want
+- Custamize Avater user able to set in there profile Section
 - 
