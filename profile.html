@@ -24,34 +24,38 @@
 
     <!-- Main Profile Container -->
     <div class="profile-container">
-      <!-- Profile Header Section -->
-      <div class="profile-header">
-        <div class="profile-picture-wrapper">
-          <img id="profilePicture" src="https://via.placeholder.com/150/0078d4/ffffff?text=User" alt="Profile Picture" class="profile-picture">
-          <button class="edit-picture-btn" id="editPictureBtn">✏️ Change Picture</button>
-        </div>
-      </div>
+      <div class="profile-layout">
+        <!-- Left sidebar: Picture + Stats -->
+        <aside class="profile-sidebar">
+          <div class="profile-card">
+            <div class="profile-header">
+              <div class="profile-picture-wrapper">
+                <img id="profilePicture" src="https://via.placeholder.com/150/0078d4/ffffff?text=User" alt="Profile Picture" class="profile-picture">
+                <button class="edit-picture-btn" id="editPictureBtn">✏️ Change Picture</button>
+              </div>
+            </div>
 
-      <!-- Profile Stats -->
-      <div class="profile-stats" id="profileStats">
-        <div class="stat-card">
-          <span class="stat-label">Friends</span>
-          <span class="stat-value" id="statFriends">0</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">Member Since</span>
-          <span class="stat-value" id="statMember">2024</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">Profile</span>
-          <span class="stat-value" id="statCompletion">60%</span>
-        </div>
-      </div>
+            <div class="profile-stats" id="profileStats">
+              <div class="stat-card">
+                <span class="stat-label">Friends</span>
+                <span class="stat-value" id="statFriends">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Member Since</span>
+                <span class="stat-value" id="statMember">2024</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Profile</span>
+                <span class="stat-value" id="statCompletion">60%</span>
+              </div>
+            </div>
+          </div>
+        </aside>
 
-      <!-- Profile Main Content -->
-      <div class="profile-content">
-        <!-- User Info Section -->
-        <section class="profile-section">
+        <!-- Right content -->
+        <div class="profile-content">
+          <!-- User Info Section -->
+          <section class="profile-section">
           <h2 class="section-title">👤 User Information</h2>
           <div class="info-group">
             <div class="info-item">
