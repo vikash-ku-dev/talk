@@ -11,49 +11,60 @@
 <body>
 
   <div id="loginPage" class="login-wrapper">
-    <form id="loginForm" class="login-card" action="#" method="post">
-      <div class="brand-block">
-        <span class="brand-badge">T</span>
-        <div>
-          <p class="eyebrow">Secure access</p>
-          <h1>Talk</h1>
-        </div>
-      </div>
-
-      <div id="skeleton" class="skeleton" aria-hidden="true">
-        <svg viewBox="0 0 200 140" width="160" height="112" xmlns="http://www.w3.org/2000/svg">
-          <g id="head" class="head" transform="translate(100,70)">
-            <ellipse cx="0" cy="0" rx="56" ry="56" fill="#e6eef6" opacity="0.06"/>
-            <g id="face">
-              <circle cx="-20" cy="-6" r="12" class="eye" fill="#fff" />
-              <circle cx="20" cy="-6" r="12" class="eye" fill="#fff" />
-              <circle id="pupilL" cx="-20" cy="-6" r="5" class="pupil" fill="#06101f" />
-              <circle id="pupilR" cx="20" cy="-6" r="5" class="pupil" fill="#06101f" />
+    <div class="auth-shell">
+      <!-- Left: Animation / Avatar -->
+      <aside class="auth-visual" aria-hidden="true">
+        <div id="skeleton" class="skeleton" aria-hidden="true">
+          <svg viewBox="0 0 200 140" width="160" height="112" xmlns="http://www.w3.org/2000/svg">
+            <g id="head" class="head" transform="translate(100,70)">
+              <ellipse cx="0" cy="0" rx="56" ry="56" fill="#e6eef6" opacity="0.12"/>
+              <g id="face">
+                <circle cx="-20" cy="-6" r="12" class="eye" fill="#fff" />
+                <circle cx="20" cy="-6" r="12" class="eye" fill="#fff" />
+                <circle id="pupilL" cx="-20" cy="-6" r="5" class="pupil" fill="#06101f" />
+                <circle id="pupilR" cx="20" cy="-6" r="5" class="pupil" fill="#06101f" />
+              </g>
             </g>
-          </g>
-        </svg>
-      </div>
-      <p class="login-copy"></p>
+          </svg>
+        </div>
+        <div class="auth-visual-copy">
+          <div class="brand-pill">Talk with confidence</div>
+          <p class="auth-subtitle">Lightweight AI practice helps you improve English and communication—every day.</p>
+        </div>
+      </aside>
 
-      <div class="field-group">
-        <label for="username">Username, email, or phone number</label>
-        <input id="username" name="username" type="text" placeholder="Enter username, email, or phone" required autocomplete="username">
-      </div>
+      <!-- Right: Inputs / Details -->
+      <form id="loginForm" class="login-card" action="#" method="post">
+        <div class="brand-block">
+          <span class="brand-badge">T</span>
+          <div>
+            <p class="eyebrow">Secure access</p>
+            <h1>Talk</h1>
+          </div>
+        </div>
 
-      <div class="field-group">
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password">
-      </div>
+        <p class="login-copy"></p>
 
-      <button type="submit">Log In</button>
+        <div class="field-group">
+          <label for="username">Username, email, or phone number</label>
+          <input id="username" name="username" type="text" placeholder="Enter username, email, or phone" required autocomplete="username">
+        </div>
 
-      <div class="help-links" aria-label="Account help">
-        <a href="#" id="forgotEmailLink" class="help-link">Forgot email?</a>
-        <a href="#" id="forgotPasswordLink" class="help-link">Forgot password?</a>
-      </div>
+        <div class="field-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
 
-      <p class="register-prompt">New here? <a href="#" id="registerLink" class="help-link">Register</a></p>
-    </form>
+        <button type="submit">Log In</button>
+
+        <div class="help-links" aria-label="Account help">
+          <a href="#" id="forgotEmailLink" class="help-link">Forgot email?</a>
+          <a href="#" id="forgotPasswordLink" class="help-link">Forgot password?</a>
+        </div>
+
+        <p class="register-prompt">New here? <a href="#" id="registerLink" class="help-link">Register</a></p>
+      </form>
+    </div>
   </div>
 
   <div id="registerPage" class="register-wrapper" style="display: none;">
