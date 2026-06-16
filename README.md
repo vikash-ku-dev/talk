@@ -14,5 +14,7 @@ they casually Talk to the ai and Ai will improve there english and also improved
 
 - A Profile Section where all the user set there profile and user make there profile public or private as they want
 - Custamize Avater user able to set in there profile Section
--
+- In this web user connect peoples and talk to peoples and make cool friends
+- There is an AI option which improve user communication skil and improve language
+- An AI translater which send and recive translated text
 - User connect people globally
