@@ -17,4 +17,4 @@ they casually Talk to the ai and Ai will improve there english and also improved
 - In this web user connect peoples and talk to peoples and make cool friends
 - There is an AI option which improve user communication skil and improve language
 - An AI translater which send and recive translated text
-- User connet people globally
+- User connect people globally
