@@ -18,3 +18,4 @@ they casually Talk to the ai and Ai will improve there english and also improved
 - There is an AI option which improve user communication skil and improve language
 - An AI translater which send and recive translated text
 - User connect people globally
+- Private chat feature in global talk
