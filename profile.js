@@ -233,7 +233,6 @@ function renderFriends() {
   });
 }
 
-// ===== ADD FRIEND MODAL =====
 function openAddFriendModal() {
   const friendInput = document.getElementById('friendInput');
   friendInput.value = '';
@@ -315,7 +314,7 @@ function removeFriend(friendId) {
   }
 }
 
-// ===== PROFILE PICTURE =====
+//   PROFILE PICTURE
 function changeProfilePicture() {
   const newPictureUrl = prompt('Enter image URL (or leave blank for default):', profileData.profilePicture);
   if (newPictureUrl === null) return; // User cancelled
@@ -331,7 +330,7 @@ function changeProfilePicture() {
   showToast('Profile picture updated successfully!', 'success');
 }
 
-// ===== MODAL CLOSE ON ESCAPE KEY =====
+//    MODAL CLOSE ON ESCAPE KEY
 document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     closeEditNameModal();
@@ -340,7 +339,7 @@ document.addEventListener('keydown', function(event) {
   }
 });
 
-// ===== MODAL CLOSE ON OUTSIDE CLICK =====
+//     MODAL CLOSE ON OUTSIDE CLICK 
 document.querySelectorAll('.modal').forEach(modal => {
   modal.addEventListener('click', function(e) {
     if (e.target === this) {
