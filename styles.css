@@ -1,10 +1,7 @@
-/*
-  WARNING: This file was previously modified. It has been replaced with a clean, coherent stylesheet
-  that preserves the existing class/id hooks used by script.js and profile.js.
 
-  Goal: human/professional light UI, auth layout with animation/skeleton on the LEFT and inputs on the RIGHT,
-  plus a lighter profile layout.
-*/
+
+
+
 
 html, body {
   min-height: 100%;
@@ -14,7 +11,8 @@ html, body {
   background: #f6f8ff;
 }
 
-/* ===================== AUTH LAYOUT (index.html) ===================== */
+
+
 
 body {
   display: block;
@@ -285,7 +283,8 @@ body {
 
 .skeleton svg { display: block; }
 
-/* Head / pupils transitions */
+
+
 .head { transition: transform 300ms ease; transform-origin: 50% 50%; transform-box: fill-box; }
 .eye { transition: transform 120ms ease; }
 .pupil { transition: transform 120ms ease; transform-origin: center; transform-box: fill-box; }
@@ -297,7 +296,10 @@ body {
   .skeleton svg { width: 120px; height: 84px; }
 }
 
-/* ===================== Register steps ===================== */
+
+
+
+
 
 .progress-bar {
   height: 6px;
